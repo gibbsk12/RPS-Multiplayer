@@ -7,9 +7,32 @@
 </head>
 
 <body>
+
     <head>
-        <img src = "./assets/images/header2.png" class = "img-fluid">
+        <img src="./assets/images/header2.png" class="img-fluid" id="headImage">
     </head>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <form class="form">
+                <div class="form-group mb-2">
+                    <label for="playerName" class="sr-only"></label>
+                    <input class="form-control" type="text" id="playerName" placeholder="Name?">
+                </div>
+                <button type="submit" id = "submitBtn" class="btn btn-danger">Submit</button>
+            </form>
+        </div>
+
+        <div class="row justify-content-center" id="greeting">message will go here</div>
+
+        <div class="row justify-content-center">
+            <div class="col-5 playerHold text-center" id = "playerOneBox">
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5 playerHold text-center" id = "playerTwoBox">
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

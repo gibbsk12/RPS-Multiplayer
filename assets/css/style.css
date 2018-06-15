@@ -1,3 +1,30 @@
 body {
-    background: linear-gradient(to bottom right, #ba622d, #653822);
+    background-image: url("../images/background.jpg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+
+  #headImage{
+      margin-top: 2%;
+      margin-bottom: 2%;
+  }
+
+  .playerHold{
+      background-color: white; 
+      opacity: 0.8;
+      min-height: 100px;
+      border-radius: 10px;
+  }
+
+  .btn-danger{
+      width: 100%;
+  }
+
+  #playerName{
+      width: 100%;
+      text-align: center;
+  }
+
+
