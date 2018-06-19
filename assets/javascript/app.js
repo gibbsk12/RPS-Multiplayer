@@ -27,6 +27,7 @@ var wins2 = 0;
 var losses1 = 0;
 var losses2 = 0;
 var playerNum = 0;
+var chatting;
 
 // Adds form to page asking players to enter their name.
 $("#welcomeMessage").html("<input id=playerName type=text placeholder='Enter your name to begin'><input id=newPlayer type=submit class ='btn btn-danger' value=Start>");
@@ -252,5 +253,23 @@ $("#playerTwoChoices").on("click", "div", function () {
 	}, 500);
 });
 
+//ChatBox attempts 
+function addChat(text){
+	chatting = $("<p>").text(player+ ': '+text)
+	$("#chatBox").append(chatting)
+
+}
+
+$("#chatButton").on("click", function (event) {
+    event.preventDefault();
+    var text = $("#userChat").val().trim();
+    if (text !== "") {
+        addChat(text);
+		$("#userChat").val('');
+		database.ref("/chat/"+player).set({
+			chat: text
+		});
+	}
+})
 
 
