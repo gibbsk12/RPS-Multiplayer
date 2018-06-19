@@ -13,26 +13,44 @@
     </head>
 
     <div class="container">
-        <div class="row justify-content-center">
-            <form class="form">
-                <div class="form-group mb-2">
-                    <label for="playerName" class="sr-only"></label>
-                    <input class="form-control" type="text" id="playerName" placeholder="Name?">
-                </div>
-                <button type="submit" id = "submitBtn" class="btn btn-danger">Submit</button>
-            </form>
-        </div>
-
-        <div class="row justify-content-center" id="greeting">message will go here</div>
-
-        <div class="row justify-content-center">
-            <div class="col-5 playerHold text-center" id = "playerOneBox">
+        <div class="row text-center justify-content-center">
+            <div class= "col-12" id = "welcomeMessage"></div>
+            <div class= "col-12" id = "gameMessage"></div>
+            <div class="col-5 playerHold text-center" id="playerOne">
+                <div id = "playerOneName"></div>
+                <div id = "playerOneChoices"></div>
+                <div id = "playerOneWinLoss"></div>
             </div>
             <div class="col-1"></div>
-            <div class="col-5 playerHold text-center" id = "playerTwoBox">
+            <div class="col-5 playerHold text-center" id="playerTwo">
+                    <div id = "playerTwoName"></div>
+                    <div id = "playerTwoChoices"></div>
+                    <div id = "playerTwoWinLoss"></div>
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="jumbotron" id="chatBox"></div>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="userChat" placeholder="Message">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="btn btn-danger" id="chatButton">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
+
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
