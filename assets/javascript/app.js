@@ -272,4 +272,8 @@ $("#chatButton").on("click", function (event) {
 	}
 })
 
+database.ref().on("value", function(childSnapshot, prevChildKey){
+	var addTheChat = ("<p>").text(childSnapshot.val().chat);
+	$("#chatBox").append(addTheChat);
+})
 
