@@ -5,12 +5,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
   }
-
   #headImage{
       margin-top: 2%;
       margin-bottom: 2%;
   }
-
   .playerHold{
       background-color: white; 
       opacity: 0.8;
@@ -18,7 +16,6 @@ body {
       border-radius: 10px;
       margin-top: 10px;
   }
-
   #playerName{
       width: 50%;
       opacity: .8;
@@ -30,21 +27,17 @@ body {
       padding-top: 0.375rem;
       padding-bottom: 0.375rem;
   }
-
   .jumbotron{
     opacity: 0.8;
     margin-top: 15px; 
     margin-bottom: 15px;
   }
-
   #welcomeMessage, #gameMessage{
       color: white;
   }
-
   #userChat{
     opacity: 0.8;
   }
-
 .choice{
     border-style: solid;
     margin-bottom: 5px;
@@ -52,7 +45,6 @@ body {
     border-width: 1px;
     border-radius: 5px;
 }
-
 .choice:hover{
     background-color: #dc3545;
 }

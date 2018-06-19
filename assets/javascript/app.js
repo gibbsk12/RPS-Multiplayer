@@ -1,13 +1,13 @@
 //Initializes firebase app
 var config = {
-    apiKey: "AIzaSyB4Zz7VNo0UonmFbIpyjJqh41DNN8RrFQU",
-    authDomain: "rockpaperscissors-938f4.firebaseapp.com",
-    databaseURL: "https://rockpaperscissors-938f4.firebaseio.com",
-    projectId: "rockpaperscissors-938f4",
-    storageBucket: "",
-    messagingSenderId: "624938628745"
-  };
-  firebase.initializeApp(config);
+	apiKey: "AIzaSyB4Zz7VNo0UonmFbIpyjJqh41DNN8RrFQU",
+	authDomain: "rockpaperscissors-938f4.firebaseapp.com",
+	databaseURL: "https://rockpaperscissors-938f4.firebaseio.com",
+	projectId: "rockpaperscissors-938f4",
+	storageBucket: "",
+	messagingSenderId: "624938628745"
+};
+firebase.initializeApp(config);
 var database = firebase.database();
 //Sets up variable names pushing to firebase
 var playerTurn = database.ref();
@@ -32,7 +32,7 @@ var playerNum = 0;
 $("#welcomeMessage").html("<input id=playerName type=text placeholder='Enter your name to begin'><input id=newPlayer type=submit class ='btn btn-danger' value=Start>");
 
 // When the database is updated, do the following [Player 1 info]
-player1.on("value", function(snapshot) {
+player1.on("value", function (snapshot) {
 	if (snapshot.val() !== null) {
 		p1 = snapshot.val().player;
 		wins1 = snapshot.val().wins;
@@ -43,12 +43,12 @@ player1.on("value", function(snapshot) {
 		$("#playerOneName").html("Waiting for Player 1");
 		$("#playerOneWinLoss").empty();
 	};
-}, function(errorObject) {
+}, function (errorObject) {
 	console.log("The read failed: " + errorObject.code);
 });
 
 // When the database is updated, do the following [Player 2 info]
-player2.on("value", function(snapshot) {
+player2.on("value", function (snapshot) {
 	if (snapshot.val() !== null) {
 		p2 = snapshot.val().player;
 		wins2 = snapshot.val().wins;
@@ -59,22 +59,22 @@ player2.on("value", function(snapshot) {
 		$("#playerTwoName").html("Waiting for Player 2");
 		$("#playerTwoWinLoss").empty();
 	};
-}, function(errorObject) {
+}, function (errorObject) {
 	console.log("The read failed: " + errorObject.code);
 });
 
 // Assign players as 1 or 2...If 2 people are already playing, let them know!
-$("#newPlayer").on("click", function() {
+$("#newPlayer").on("click", function () {
 	event.preventDefault();
 	player = $("#playerName").val().trim();
-	player1.once("value", function(snapshot) {
+	player1.once("value", function (snapshot) {
 		p1snapshot = snapshot;
-	}, function(errorObject) {
+	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 	});
-	player2.once("value", function(snapshot) {
+	player2.once("value", function (snapshot) {
 		p2snapshot = snapshot;
-	}, function(errorObject) {
+	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 	});
 	if (!p1snapshot.exists()) { //If no one is playing, assign the person as Player 1 until they disconnect
@@ -107,23 +107,23 @@ $("#newPlayer").on("click", function() {
 	};
 });
 
-players.on("value", function(snapshot) { //If both players leave, reset the game!
+players.on("value", function (snapshot) { //If both players leave, reset the game!
 	if (snapshot.val() == null) {
 		playerTurn.set({});
 	};
-}, function(errorObject) {
+}, function (errorObject) {
 	console.log("The read failed: " + errorObject.code);
 });
 
-var findResults = function() { //Grab the players' choices
-	player1.once("value", function(snapshot) {
+var findResults = function () { //Grab the players' choices
+	player1.once("value", function (snapshot) {
 		p1result = snapshot;
-	}, function(errorObject) {
+	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 	});
-	player2.once("value", function(snapshot) {
+	player2.once("value", function (snapshot) {
 		p2result = snapshot;
-	}, function(errorObject) {
+	}, function (errorObject) {
 		console.log("The read failed: " + errorObject.code);
 	});
 	if (p1result.val() !== null && p2result.val() !== null) { //Game logic
@@ -136,14 +136,14 @@ var findResults = function() { //Grab the players' choices
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
 			wins1++;
-      losses2++;
-    } else if (p1result.val().choice == "Paper" && p2result.val().choice == "Rock") {//PlayerOne wins
+			losses2++;
+		} else if (p1result.val().choice == "Paper" && p2result.val().choice == "Rock") {//PlayerOne wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
 			wins1++;
-      losses2++;
-    } else if (p1result.val().choice == "Scissors" && p2result.val().choice == "Paper") {//PlayerOne wins
+			losses2++;
+		} else if (p1result.val().choice == "Scissors" && p2result.val().choice == "Paper") {//PlayerOne wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
@@ -169,13 +169,13 @@ var findResults = function() { //Grab the players' choices
 			losses1++;
 		};
 		// Reset the Game to Play Again
-		setTimeout(function() {
+		setTimeout(function () {
 			playerTurn.update({
 				turn: 1
 			});
-			player1.once("value", function(snapshot) {
+			player1.once("value", function (snapshot) {
 				p1result = snapshot;
-			}, function(errorObject) {
+			}, function (errorObject) {
 				console.log("The read failed: " + errorObject.code);
 			});
 			if (p1result.val() !== null) {
@@ -184,9 +184,9 @@ var findResults = function() { //Grab the players' choices
 					losses: losses1
 				});
 			};
-			player2.once("value", function(snapshot) {
+			player2.once("value", function (snapshot) {
 				p2result = snapshot;
-			}, function(errorObject) {
+			}, function (errorObject) {
 				console.log("The read failed: " + errorObject.code);
 			});
 			if (p2result.val() !== null) {
@@ -197,11 +197,11 @@ var findResults = function() { //Grab the players' choices
 			};
 			$("#gameMessage").html("");
 			$("#playerTwoChoices").html("");
-			}, 2000);
+		}, 2000);
 	};
 };
 //Updates with PlayerTurn
-playerTurn.on("value", function(snapshot) {
+playerTurn.on("value", function (snapshot) {
 	if (snapshot.val() !== null) { //Waiting message during other player's turn
 		if (snapshot.val().turn == 2 && playerNum == 1) {
 			$("#gameMessage").html("Waiting for " + p2 + " to choose.");
@@ -227,25 +227,25 @@ playerTurn.on("value", function(snapshot) {
 		};
 	};
 });
-$("#playerOneChoices").on("click", "div", function() {//Show Players their own choice
+$("#playerOneChoices").on("click", "div", function () {//Show Players their own choice
 	var choice = $(this).text();
 	$("#playerOneChoices").html("<h1>" + choice + "</h1>");
-	setTimeout(function() {
+	setTimeout(function () {
 		playerTurn.update({
 			turn: 2
 		});
 		player1.update({
 			choice: choice
-		}); 
+		});
 	}, 500);
 });
-$("#playerTwoChoices").on("click", "div", function() {
+$("#playerTwoChoices").on("click", "div", function () {
 	var choice = $(this).text();
 	$("#playerTwoChoices").html("<h1>" + choice + "</h1>");
-	setTimeout(function() {
+	setTimeout(function () {
 		player2.update({
 			choice: choice
-		}); 
+		});
 		playerTurn.update({
 			turn: 3
 		});
