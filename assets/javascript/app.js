@@ -43,6 +43,13 @@ player1.on("value", function (snapshot) {
 	} else {
 		$("#playerOneName").html("Waiting for Player 1");
 		$("#playerOneWinLoss").empty();
+		if (p1 !== null){
+			database.ref("/chat/").push({ //If the player leaves, write a message to the chatBox
+				player: p1,
+				chat: " has left the game!",
+				dateAdded: firebase.database.ServerValue.TIMESTAMP
+			})
+		}
 	};
 }, function (errorObject) {
 	console.log("The read failed: " + errorObject.code);
@@ -59,6 +66,13 @@ player2.on("value", function (snapshot) {
 	} else {
 		$("#playerTwoName").html("Waiting for Player 2");
 		$("#playerTwoWinLoss").empty();
+		if (p2 !== null){
+			database.ref("/chat/").push({ //If the player leaves the game, write the message
+				player: p2,
+				chat: " has left the game!",
+				dateAdded: firebase.database.ServerValue.TIMESTAMP
+			})
+		}
 	};
 }, function (errorObject) {
 	console.log("The read failed: " + errorObject.code);
@@ -252,28 +266,23 @@ $("#playerTwoChoices").on("click", "div", function () {
 		});
 	}, 500);
 });
-
-//ChatBox attempts 
-function addChat(text){
-	chatting = $("<p>").text(player+ ': '+text)
-	$("#chatBox").append(chatting)
-
-}
-
-$("#chatButton").on("click", function (event) {
+$("#chatButton").on("click", function (event) {//When the chat button is clicked
     event.preventDefault();
     var text = $("#userChat").val().trim();
-    if (text !== "") {
-        addChat(text);
+    if (text !== "") { //& the message isn't empty
 		$("#userChat").val('');
-		database.ref("/chat/"+player).set({
-			chat: text
+		database.ref("/chat/").push({ //Add the message to the firebase database
+			player: player+": ", //with the player name and a colon
+			chat: text, //and the mext of the message
+			dateAdded: firebase.database.ServerValue.TIMESTAMP //and a timeStamp for ordering the chats 
 		});
-	}
+	};
+});
+database.ref("/chat").orderByChild("dateAdded").on("child_added", function(snapshot){
+	$("#chatBox").append(snapshot.val().player + snapshot.val().chat + "<br>");
 })
 
-database.ref().on("value", function(childSnapshot, prevChildKey){
-	var addTheChat = ("<p>").text(childSnapshot.val().chat);
-	$("#chatBox").append(addTheChat);
-})
-
+// This is what I want to do 
+//https://stackoverflow.com/questions/15629599/how-to-fix-the-scrollbar-always-at-the-bottom-of-a-div
+// $("#chatBox").animate({ scrollTop: $(this).height() }, "slow");
+//   return false;

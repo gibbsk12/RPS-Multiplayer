@@ -48,3 +48,10 @@ body {
 .choice:hover{
     background-color: #dc3545;
 }
+
+#chatBox{
+    overflow: scroll;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 200px;
+}
