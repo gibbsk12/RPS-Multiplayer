@@ -146,37 +146,37 @@ var findResults = function () { //Grab the players' choices
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>Tie Game!</h1>");
-		} else if (p1result.val().choice == "Rock" && p2result.val().choice == "Scissors") {//PlayerOne wins
+		} else if (p1result.val().choice == "ROCK" && p2result.val().choice == "SCISSORS") {//PlayerOne wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
 			wins1++;
 			losses2++;
-		} else if (p1result.val().choice == "Paper" && p2result.val().choice == "Rock") {//PlayerOne wins
+		} else if (p1result.val().choice == "PAPER" && p2result.val().choice == "ROCK") {//PlayerOne wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
 			wins1++;
 			losses2++;
-		} else if (p1result.val().choice == "Scissors" && p2result.val().choice == "Paper") {//PlayerOne wins
+		} else if (p1result.val().choice == "SCISSORS" && p2result.val().choice == "PAPER") {//PlayerOne wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p1 + " wins!</h1>");
 			wins1++;
 			losses2++;
-		} else if (p1result.val().choice == "Rock" && p2result.val().choice == "Paper") {//PlayerTwo wins
+		} else if (p1result.val().choice == "ROCK" && p2result.val().choice == "PAPER") {//PlayerTwo wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p2 + " wins!</h1>");
 			wins2++;
 			losses1++;
-		} else if (p1result.val().choice == "Paper" && p2result.val().choice == "Scissors") {//PlayerTwo wins
+		} else if (p1result.val().choice == "PAPER" && p2result.val().choice == "SCISSORS") {//PlayerTwo wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p2 + " wins!</h1>");
 			wins2++;
 			losses1++;
-		} else if (p1result.val().choice == "Scissors" && p2result.val().choice == "Rock") {//PlayerTwo wins
+		} else if (p1result.val().choice == "SCISSORS" && p2result.val().choice == "ROCK") {//PlayerTwo wins
 			$("#playerOneChoices").html("<h1>" + p1result.val().choice + "</h1>");
 			$("#playerTwoChoices").html("<h1>" + p2result.val().choice + "</h1>");
 			$("#gameMessage").html("<h1>" + p2 + " wins!</h1>");
@@ -215,7 +215,7 @@ var findResults = function () { //Grab the players' choices
 		}, 2000);
 	};
 };
-//Updates with PlayerTurn
+//Updates the database
 playerTurn.on("value", function (snapshot) {
 	if (snapshot.val() !== null) { //Waiting message during other player's turn
 		if (snapshot.val().turn == 2 && playerNum == 1) {
@@ -226,15 +226,15 @@ playerTurn.on("value", function (snapshot) {
 		}
 		if (snapshot.val().turn == 1 && playerNum == 1) {//Player 1 goes first, loads RPS Choices
 			$("#playerOneChoices").empty();
-			$("#playerOneChoices").append("<div class = 'choice'>Rock</div>");
-			$("#playerOneChoices").append("<div class = 'choice'>Paper</div>");
-			$("#playerOneChoices").append("<div class = 'choice'>Scissors</div>");
+			$("#playerOneChoices").append("<div class = 'choice'>ROCK</div>");
+			$("#playerOneChoices").append("<div class = 'choice'>PAPER</div>");
+			$("#playerOneChoices").append("<div class = 'choice'>SCISSORS</div>");
 			$("#gameMessage").html("It's your turn!");
 		} else if (snapshot.val().turn == 2 && playerNum == 2) {//Player 2 goes second, loads RPS Choices
 			$("#playerTwoChoices").empty();
-			$("#playerTwoChoices").append("<div class = 'choice'>Rock</div>");
-			$("#playerTwoChoices").append("<div class = 'choice'>Paper</div>");
-			$("#playerTwoChoices").append("<div class = 'choice'>Scissors</div>");
+			$("#playerTwoChoices").append("<div class = 'choice'>ROCK</div>");
+			$("#playerTwoChoices").append("<div class = 'choice'>PAPER</div>");
+			$("#playerTwoChoices").append("<div class = 'choice'>SCISSORS</div>");
 			$("#gameMessage").html("It's your turn!");
 		} else if (snapshot.val().turn == 3) {//When both players have chosen, call Result functions
 			$("#gameMessage").html("");
@@ -266,6 +266,7 @@ $("#playerTwoChoices").on("click", "div", function () {
 		});
 	}, 500);
 });
+
 $("#chatButton").on("click", function (event) {//When the chat button is clicked
     event.preventDefault();
     var text = $("#userChat").val().trim();
@@ -282,7 +283,17 @@ database.ref("/chat").orderByChild("dateAdded").on("child_added", function(snaps
 	$("#chatBox").append(snapshot.val().player + snapshot.val().chat + "<br>");
 })
 
-// This is what I want to do 
+//GOALS--
+
+// KEEP CHAT MESSAGE BOX AT THE BOTTOM OF THE CONVERSATION 
 //https://stackoverflow.com/questions/15629599/how-to-fix-the-scrollbar-always-at-the-bottom-of-a-div
 // $("#chatBox").animate({ scrollTop: $(this).height() }, "slow");
 //   return false;
+
+//ALLOW USERS TO HIT THE ENTER BUTTON TO SUBMIT THE FORM
+// $("#userChat").keydown(function(){
+// 	var key = e.which;
+// 	if (key==13){
+// 		$("#userChat").submit();
+// 	}
+// })
