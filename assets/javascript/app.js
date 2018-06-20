@@ -1,3 +1,13 @@
+//Prevents the page from reloading when the enter key is pressed 
+//I don't understand why it was refreshing on the enter key was pressed in the first place
+//But this solution works 
+$(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+
 //Initializes firebase app
 var config = {
 	apiKey: "AIzaSyB4Zz7VNo0UonmFbIpyjJqh41DNN8RrFQU",
@@ -287,13 +297,7 @@ database.ref("/chat").orderByChild("dateAdded").on("child_added", function(snaps
 
 // KEEP CHAT MESSAGE BOX AT THE BOTTOM OF THE CONVERSATION 
 //https://stackoverflow.com/questions/15629599/how-to-fix-the-scrollbar-always-at-the-bottom-of-a-div
-// $("#chatBox").animate({ scrollTop: $(this).height() }, "slow");
-//   return false;
+// $("#userChat").animate({ scrollTop: $("#userChat")[0].scrollHeight}, 500);
+// console.log($("#chatBox")[0].scrollHeight);
 
-//ALLOW USERS TO HIT THE ENTER BUTTON TO SUBMIT THE FORM
-// $("#userChat").keydown(function(){
-// 	var key = e.which;
-// 	if (key==13){
-// 		$("#userChat").submit();
-// 	}
-// })
+
